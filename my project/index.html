@@ -1,0 +1,460 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Royalty Print Zambia</title>
+ <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <!-- 🔒 Block access if not logged in -->
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <style>
+    body {
+      background-image: url("kk.jpg"),url(back.webp);
+      background-blend-mode: screen;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      margin: 0;
+      font-family: 'Montserrat', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background-color: #07033ff1;
+      font-weight: bold;
+      color: #030611;
+    }
+    header {
+      background: #d6dfd7;
+      color: #06075a;
+      font-weight: bold;
+      padding: 30px;
+      text-align: center;
+    }
+    nav {
+      background: #024e15;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 5px;
+      border-radius: 10px;
+    }
+    nav a {
+      color: rgb(231, 238, 232);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+    .hero {
+      background-size:100% 100%;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: rgb(14, 13, 8);
+      text-align: cover;
+      font-weight: bold;
+      padding: 100px 20px;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.8rem;
+    }
+    .section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .services-grid, .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+   .cotainer{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+   }
+   h2 {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 3em;
+    width: 400px;
+    margin: 2px;
+      
+   }
+   span{
+    font-size: 3rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    color: #0d02a8;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    box-shadow: 4px 4px 5px #050708;
+    border-radius: 10px;
+   }
+   img{
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    transition: all 0.2s;
+   }
+   img:hover{
+    transform: scale(1.1);
+   }
+    .card {
+      background:rgba(230, 229, 223, 0.815);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 30px rgba(44, 6, 214, 0.911);
+      text-align: center;
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .contact-form button, .card button, #checkoutBtn {
+      background: #27c20900;
+      color: rgb(2, 14, 5);
+      font-weight: bold;
+      font-size: larger;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    footer {
+      background: #07070a;
+      color: rgba(221, 236, 225, 0.986);
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 2px 1px;
+      border-radius: 10px;
+    }
+    .extras {
+      background-color: #131403fd;
+      color: #d6dfd7;
+      font-size: 1.5em;
+      font-family: 'Times New Roman', Times, serif;
+      padding: 1px;
+      border-radius: 40px;
+      margin-top: 40px;
+    }
+    #cart {
+      background:none;
+      color: #3209eb;
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 30px;
+     
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    .social-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 1000;
+    }
+    .social-fab a {
+      background-color:#0b0c13;
+      color: rgb(238, 241, 239);
+      font-size: 40px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition: background 0.3s ease,  transform 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+    #logout-container{
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: rgb(10, 9, 15);
+      color: rgb(21, 180, 16);
+      border-radius: 20px;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0, 0,  0, 0.2);
+      font-size: 18px;
+      z-index: 999;
+    }
+    #logout-container{
+      font-size: 40px;
+    }
+    #logout-container span{
+      font-size: 10px;
+      margin-top: 3px;
+    }
+    #promo-video{
+      text-align: center;
+      padding: 40px 20px;
+      color: #030611;
+    }
+    #promo-video video{
+      max-width: 300px;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body> 
+   
+  <div class="social-fab">
+    <a href="http://wa.me/260962398134" style="background-color: GREEN; font-size: 30px;" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="http://facebook.com/royaltyprint" style="color: blue; font-size: 30px; background-color: white;" _target="blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="http://Instagram.com/royaltyprint13" style="color: rgb(231, 223, 231); font: size 30px; background-color: rgb(211, 32, 136);" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="http://x.com/royaltyprint" style="font-size: 30px;" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+    <a href="mailto:royaltyprint13@gmail.com" style="font-size: 30px; color: red; background-color: white;" target="_blank" aria-label="gmail"><i class="fab fa-google"></i></a>
+    <a href="http://youtube.com/@royaltyprint13" style="color: RED; font-size: 30px; background-color: white;" target="_blank" aria-label="youtube"><i class="fab fa-youtube"></i></a>
+    <a href="http://t.me/@royaltyprint" style="color: rgb(18, 108, 192); font-size: 40px; background-color: rgba(212, 213, 214, 0.89);" target="_blank" aria-label="telegram"><i class="fab fa-telegram-plane"></i></a>
+  </div>
+  <header class="hero" style="background-image: url('back.webp'); padding: 2px; background-blend-mode: screen; background-color: #034747; ">
+    <h1>Royalty Print</h1>
+    <p>WE DO IT OUR OWN WAY</p>
+  </header> 
+ <div id="logout-container">
+  <button onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i>
+  </button>
+ </div>
+ <script>
+  function logout(){
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html"
+  }
+ </script>
+</body>
+</html>
+   <nav>
+    <a href="#services"><i class="fas fa-tools"></i>services </a>
+<a href="#shop"><i class="fas fa-store"></i>shop </a>
+<a href="#Gallery"><i class="fas fa-images"></i>Gallery </a>
+<a href="#contact"><i class="fas fa-envelope"></i>contact</a>
+   
+  </nav>
+   <section class="hero">
+    <h1>Your Royal Choice for Custom Prints & Branding</h1>
+    <p>Professional printing services for your every need</p>
+  </section>  <section class="section" id="services">
+    <h2><span> Services</span></h2>
+    <div class="services-grid">
+      <div class="card">
+        <h3>T-Shirt Printing</h3>
+        <p>Custom designs, sublimation & vinyl options</p>
+      </div>
+      <div class="card">
+        <h3>Vinyl Cutting</h3>
+        <p>High-quality vinyl for labels and branding</p>
+      </div>
+      <div class="card">
+        <h3>Heat Press</h3>
+        <p>Precision pressing for fabrics & more</p>
+      </div>
+      <div class="card">
+        <h3>Embroidery</h3>
+        <p>Logo and name embroidery for corporate wear</p>
+      </div>
+      <div class="card">
+        <h3>Banners & Stickers</h3>
+        <p>Durable, full-color prints for all purposes</p>
+      </div>
+      <div class="card">
+        <h3>Branding Solutions</h3>
+        <p>Mugs, caps, flyers, business cards and more</p>
+      </div>
+      <div class="card">
+        <h3>Branding Solutions</h3>
+        <p>Mugs, caps, flyers, business cards and more</p></div>
+        <div class="card">
+          <h3>Branding Solutions</h3>
+          <p>Mugs, caps, flyers, business cards and more</p></div>
+    </div>
+  </section><section class="section" id="Gallery">
+    <h2><span>Gallery</span></h2>
+    <div class="container">
+      <img src="YES.webp">
+      <img src="kk.jpg">
+      <img src="Apparel.jpeg">
+      <img src="blend.jpg">
+      <img src="you.webp">
+      <img src="me.jpg">
+      <img src="HELLO.png">
+      <img src="k.png">
+      <img src="hey.jpg">
+      </div>
+    <h2><span> Our Products</span></h2>
+    <div class="shop-grid" id="productGrid"></div>
+    <div class="extras">
+      <h3>Extras</h3>
+      <ul>
+        <li>Free design consultation with every order</li>
+        <li>WhatsApp support for urgent orders</li>
+        <li>Bulk order discounts available</li>
+        <li>Same-day delivery available in solwezi</li>
+      </ul>
+    </div>
+    </section><section class="section" id="shop"></section>
+    <div id="cart">
+      <h3>Your Cart</h3>
+      <ul id="cartItems"></ul>
+      <p><strong>Total:</strong> K <span id="cartTotal">0</span></p>
+      <button id="checkoutBtn" onclick="checkoutOrder()">Send Order on WhatsApp</button>
+    </div>
+  </section>
+  </section>  
+  </section>  <section class="section" id="contact">
+    <h2><span>Contact Us</span></h2>
+    <p><strong>Phone:</strong> +260962398134 / +260570566534</p>
+    <p><strong>Email:</strong> royaltyprintzambia@gmail.com</p>
+    <p><strong>Location:</strong> solwezi, Zambia</p>
+    <p><a href="https://wa.me/260962398134" style="color:#0c0505;font-size: 30px;">Talk To Us</a></p>
+  </section>  <section class="section admin-panel " id="admin">
+    
+    <table>
+      <body>
+
+      <section class="section" id="promo-video">
+  <h2>Watch Our Production in Action</h2>
+  <video width="100%" controls poster="thumbnail.jpg">
+    <video controls autoplay muted loop>
+    <source src="royalty-video.mp4" type="video/mp4"></video></section>
+</body> 
+  </video>
+    </table>
+  </section>
+    <footer>
+   
+    <p>&copy; 2025 Royalty Print. All rights reserved.</p>
+  </footer> 
+  <script>
+    function logout(){
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "login.html"
+    }
+  </script> 
+  <script>
+    const products = [
+      { name: "Plain T-Shirts", price: 50 },
+      { name: "Vinyl Rolls", price: 120 },
+      { name: "Custom Mugs", price: 60 },
+      { name: "Custom Mugs", price: 60 },
+      { name: "Custom Mugs", price: 60 },
+      { name: "Custom Mugs", price: 60 },
+      { name: "Custom Mugs", price: 60 },
+      { name: "Heat Press Machine", price: 3500 }
+    ];
+
+    const cart = [];
+
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      products.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${p.name}</h3>
+          <p>K${p.price}</p>
+          <input type="file" />
+          <button onclick='addToCart("${p.name}", ${p.price})'>Add to Cart</button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById("cartItems");
+      const cartTotal = document.getElementById("cartTotal");
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price;
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - K${item.price}`;
+        cartItems.appendChild(li);
+      });
+      cartTotal.textContent = total;
+    }
+
+    function checkoutOrder() {
+      let message = "Hello, I would like to place an order:%0A";
+      cart.forEach(item => {
+        message += `- ${item.name} - K${item.price}%0A`;
+      });
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      message += `Total: K${total}`;
+      window.open(`https://wa.me/260962398134?text=${message}`, "_blank");
+    }
+
+    renderProducts();
+  </script>
+    </script>
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAzMVtSvEU4rrcmCFq7dwD5WrMI8D3FQZE",
+    authDomain: "royalty-print.firebaseapp.com",
+    projectId: "royalty-print",
+    storageBucket: "royalty-print.firebasestorage.app",
+    messagingSenderId: "1075827345019",
+    appId: "1:1075827345019:web:95b920f86be95803d9c4de",
+    measurementId: "G-N2Y2TD0EPC"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+  </body>
+</html>

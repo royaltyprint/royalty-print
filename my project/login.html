@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | Royalty Print</title>
+  <style>
+    body {
+      background-image: url("kk.jpg"),url(back.webp);
+      background-blend-mode: screen;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%; 
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: rgb(25, 167, 12);
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #08090c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    
+    }
+    a {
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+      color: #1113;
+      text-decoration: none;
+    }
+    .error, .success {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2 id="formTitle">Welcome To Royalty</h2>
+
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+
+    <input type="password" id="confirmPassword" placeholder="Confirm Password" style="display:none;" />
+
+    <button onclick="handleAction()">Login</button>
+
+    <a href="#" onclick="toggleForm('signup')">Don't have an account? Sign Up</a>
+    <a href="#" onclick="toggleForm('login')">Already have an account? Login</a>
+    <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+
+    <div class="error" id="error"></div>
+    <div class="success" id="success"></div>
+  </div>
+
+  <script>
+    let mode = "login"; // or "signup"
+
+    function toggleForm(target) {
+      mode = target;
+      document.getElementById("error").textContent = "";
+      document.getElementById("success").textContent = "";
+
+      if (target === "signup") {
+        document.getElementById("formTitle").textContent = "Sign Up";
+        document.querySelector("button").textContent = "Sign Up";
+        document.getElementById("confirmPassword").style.display = "block";
+      } else {
+        document.getElementById("formTitle").textContent = "Login";
+        document.querySelector("button").textContent = "Login";
+        document.getElementById("confirmPassword").style.display = "none";
+      }
+    }
+
+    function handleAction() {
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirmPassword").value;
+      const errorBox = document.getElementById("error");
+      const successBox = document.getElementById("success");
+      errorBox.textContent = "";
+      successBox.textContent = "";
+
+      if (mode === "signup") {
+        if (!email || !password || !confirm) {
+          errorBox.textContent = "All fields are required";
+          return;
+        }
+        if (password !== confirm) {
+          errorBox.textContent = "Passwords do not match";
+          return;
+        }
+
+        if (localStorage.getItem(email)) {
+          errorBox.textContent = "User already exists";
+        } else {
+          localStorage.setItem(email, JSON.stringify({ password }));
+          successBox.textContent = "Signup successful! You can now log in.";
+          toggleForm("login");
+        }
+
+      } else {
+        // Login
+        if (!email || !password) {
+          errorBox.textContent = "Please enter email and password";
+          return;
+        }
+
+        const userData = JSON.parse(localStorage.getItem(email));
+        if (!userData || userData.password !== password) {
+          errorBox.textContent = "Incorrect email or password";
+        } else {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("currentUser", email);
+          window.location.href = "index.html";
+        }
+      }
+    }
+
+    function forgotPassword() {
+      const email = prompt("Enter your email:");
+      if (!email) return;
+
+      const userData = JSON.parse(localStorage.getItem(email.trim().toLowerCase()));
+      if (userData) {
+        alert("Your password is: " + userData.password);
+      } else {
+        alert("No account found with that email.");
+      }
+    }
+
+    // Auto-login if already logged in
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
+
